@@ -96,7 +96,7 @@ class HotelManager {
         this.renderHoteles();
         this.cargarSelectHoteles();
         this.limpiarFormulario('hotelForm');
-        this.mostrarAlerta('✅ Hotel agregado exitosamente', 'success');
+        this.mostrarAlerta('Hotel agregado exitosamente', 'success');
     }
 
     editarHotel(id) {
@@ -126,7 +126,7 @@ class HotelManager {
             this.renderHoteles();
             this.cargarSelectHoteles();
             bootstrap.Modal.getInstance(document.getElementById('editHotelModal')).hide();
-            this.mostrarAlerta('✏️ Hotel actualizado exitosamente', 'success');
+            this.mostrarAlerta('Hotel actualizado exitosamente', 'success');
         }
     }
 
@@ -139,7 +139,7 @@ class HotelManager {
             this.renderHoteles();
             this.renderHabitaciones();
             this.cargarSelectHoteles();
-            this.mostrarAlerta('🗑️ Hotel eliminado exitosamente', 'info');
+            this.mostrarAlerta('Hotel eliminado exitosamente', 'info');
         }
     }
 
@@ -147,7 +147,7 @@ class HotelManager {
         const tbody = document.getElementById('hotelTableBody');
         
         if (this.hoteles.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="4" class="text-center text-muted">No hay hoteles registrados</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="4" class="text-center text-muted py-5"><div class="empty-state"><div class="empty-state-icon">∅</div><p>No hay hoteles registrados</p><small>Agrega tu primer hotel para comenzar</small></div></td></tr>';
             return;
         }
 
@@ -157,19 +157,23 @@ class HotelManager {
                 <td>${hotel.ubicacion}</td>
                 <td>
                     <span class="badge bg-warning">
-                        ${'⭐'.repeat(hotel.estrellas)}
+                        ${this.renderEstrellas(hotel.estrellas)}
                     </span>
                 </td>
                 <td>
                     <button class="btn btn-sm btn-warning" onclick="manager.editarHotel(${hotel.id})">
-                        ✏️ Editar
+                        Editar
                     </button>
                     <button class="btn btn-sm btn-danger" onclick="manager.eliminarHotel(${hotel.id})">
-                        🗑️ Eliminar
+                        Eliminar
                     </button>
                 </td>
             </tr>
         `).join('');
+    }
+
+    renderEstrellas(cantidad) {
+        return Array(cantidad).fill('★').join('');
     }
 
     // ==========================================
@@ -201,7 +205,7 @@ class HotelManager {
         this.guardarHabitaciones();
         this.renderHabitaciones();
         this.limpiarFormulario('habitacionForm');
-        this.mostrarAlerta('✅ Habitación agregada exitosamente', 'success');
+        this.mostrarAlerta('Habitación agregada exitosamente', 'success');
     }
 
     editarHabitacion(id) {
@@ -233,7 +237,7 @@ class HotelManager {
             this.guardarHabitaciones();
             this.renderHabitaciones();
             bootstrap.Modal.getInstance(document.getElementById('editHabitacionModal')).hide();
-            this.mostrarAlerta('✏️ Habitación actualizada exitosamente', 'success');
+            this.mostrarAlerta('Habitación actualizada exitosamente', 'success');
         }
     }
 
@@ -242,7 +246,7 @@ class HotelManager {
             this.habitaciones = this.habitaciones.filter(h => h.id !== id);
             this.guardarHabitaciones();
             this.renderHabitaciones();
-            this.mostrarAlerta('🗑️ Habitación eliminada exitosamente', 'info');
+            this.mostrarAlerta('Habitación eliminada exitosamente', 'info');
         }
     }
 
@@ -250,7 +254,7 @@ class HotelManager {
         const tbody = document.getElementById('habitacionTableBody');
         
         if (this.habitaciones.length === 0) {
-            tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted">No hay habitaciones registradas</td></tr>';
+            tbody.innerHTML = '<tr><td colspan="6" class="text-center text-muted py-5"><div class="empty-state"><div class="empty-state-icon">∅</div><p>No hay habitaciones registradas</p><small>Registra tu primera habitación para comenzar</small></div></td></tr>';
             return;
         }
 
@@ -268,10 +272,10 @@ class HotelManager {
                     <td><span class="badge bg-${tipoColor}">${habitacion.tipo}</span></td>
                     <td>
                         <button class="btn btn-sm btn-warning" onclick="manager.editarHabitacion(${habitacion.id})">
-                            ✏️ Editar
+                            Editar
                         </button>
                         <button class="btn btn-sm btn-danger" onclick="manager.eliminarHabitacion(${habitacion.id})">
-                            🗑️ Eliminar
+                            Eliminar
                         </button>
                     </td>
                 </tr>
@@ -350,5 +354,5 @@ let manager;
 
 document.addEventListener('DOMContentLoaded', () => {
     manager = new HotelManager();
-    console.log('✅ Aplicación de Gestión de Hoteles iniciada correctamente');
+    console.log('Aplicación de Gestión de Hoteles iniciada correctamente');
 });

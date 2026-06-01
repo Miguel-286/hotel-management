@@ -3,36 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gestión de Hoteles</title>
+    <title>Hotel Management System</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <!-- Encabezado -->
-    <nav class="navbar navbar-dark bg-primary sticky-top">
+    <nav class="navbar navbar-dark sticky-top">
         <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1">🏨 Gestión de Hoteles</span>
-            <span class="navbar-text text-white">Bienvenido</span>
+            <div class="d-flex align-items-center gap-3">
+                <div class="navbar-logo">HM</div>
+                <div>
+                    <span class="navbar-brand mb-0">Hotel Management</span>
+                    <div class="navbar-subtitle">Sistema de Gestión Integral</div>
+                </div>
+            </div>
+            <span class="navbar-text">Bienvenido al Sistema</span>
         </div>
     </nav>
 
-    <div class="container-fluid">
+    <div class="container-fluid main-wrapper">
         <div class="row">
             <!-- Sidebar -->
-            <nav class="col-md-2 d-md-block bg-light sidebar">
-                <div class="position-sticky pt-3">
-                    <ul class="nav flex-column">
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#" data-section="hoteles">
-                                📍 Gestión de Hoteles
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" data-section="habitaciones">
-                                🛏️ Gestión de Habitaciones
-                            </a>
-                        </li>
-                    </ul>
+            <nav class="sidebar">
+                <div class="sidebar-header">
+                    <h5>Menú Principal</h5>
+                </div>
+                <ul class="nav flex-column">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" data-section="hoteles">
+                            <span class="nav-icon">🏢</span>
+                            <span>Hoteles</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-section="habitaciones">
+                            <span class="nav-icon">🛏️</span>
+                            <span>Habitaciones</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="sidebar-footer">
+                    <p class="mb-0">v1.0</p>
                 </div>
             </nav>
 
@@ -40,56 +52,71 @@
             <main class="col-md-10 ms-sm-auto px-md-4 content">
                 <!-- Sección de Hoteles -->
                 <section id="hoteles-section" class="section-content">
-                    <div class="pt-3 pb-2 mb-3 border-bottom">
-                        <h2>Gestión de Hoteles</h2>
+                    <div class="section-header">
+                        <h1>Gestión de Hoteles</h1>
+                        <p class="section-subtitle">Administra todos tus hoteles en un solo lugar</p>
                     </div>
 
-                    <!-- Formulario de Hoteles -->
-                    <div class="card mb-4">
-                        <div class="card-header bg-primary text-white">
-                            <h5 class="mb-0">Agregar Nuevo Hotel</h5>
+                    <div class="row">
+                        <!-- Formulario de Hoteles -->
+                        <div class="col-lg-5">
+                            <div class="card card-elevated">
+                                <div class="card-header card-header-gradient">
+                                    <h5 class="mb-0">Agregar Nuevo Hotel</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form id="hotelForm">
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control" id="hotelNombre" placeholder="Nombre" required>
+                                            <label for="hotelNombre">Nombre del Hotel</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control" id="hotelUbicacion" placeholder="Ubicación" required>
+                                            <label for="hotelUbicacion">Ubicación</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="number" class="form-control" id="hotelEstrellas" min="1" max="5" placeholder="Estrellas" required>
+                                            <label for="hotelEstrellas">Clasificación (1-5)</label>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary w-100">
+                                            <span>Agregar Hotel</span>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <form id="hotelForm">
-                                <div class="mb-3">
-                                    <label for="hotelNombre" class="form-label">Nombre del Hotel</label>
-                                    <input type="text" class="form-control" id="hotelNombre" placeholder="Ingrese el nombre" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="hotelUbicacion" class="form-label">Ubicación</label>
-                                    <input type="text" class="form-control" id="hotelUbicacion" placeholder="Ingrese la ubicación" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="hotelEstrellas" class="form-label">Estrellas</label>
-                                    <input type="number" class="form-control" id="hotelEstrellas" min="1" max="5" placeholder="1-5" required>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Agregar Hotel</button>
-                            </form>
-                        </div>
-                    </div>
 
-                    <!-- Lista de Hoteles -->
-                    <div class="card">
-                        <div class="card-header bg-secondary text-white">
-                            <h5 class="mb-0">Lista de Hoteles</h5>
-                        </div>
-                        <div class="card-body">
-                            <div id="hotelList" class="table-responsive">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Nombre</th>
-                                            <th>Ubicación</th>
-                                            <th>Estrellas</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="hotelTableBody">
-                                        <tr>
-                                            <td colspan="4" class="text-center text-muted">No hay hoteles registrados</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                        <!-- Lista de Hoteles -->
+                        <div class="col-lg-7">
+                            <div class="card card-elevated">
+                                <div class="card-header card-header-gradient-secondary">
+                                    <h5 class="mb-0">Lista de Hoteles Registrados</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div id="hotelList" class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Nombre</th>
+                                                    <th>Ubicación</th>
+                                                    <th>Calificación</th>
+                                                    <th>Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="hotelTableBody">
+                                                <tr>
+                                                    <td colspan="4" class="text-center text-muted py-5">
+                                                        <div class="empty-state">
+                                                            <div class="empty-state-icon">∅</div>
+                                                            <p>No hay hoteles registrados</p>
+                                                            <small>Agrega tu primer hotel para comenzar</small>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -97,73 +124,88 @@
 
                 <!-- Sección de Habitaciones -->
                 <section id="habitaciones-section" class="section-content d-none">
-                    <div class="pt-3 pb-2 mb-3 border-bottom">
-                        <h2>Gestión de Habitaciones</h2>
+                    <div class="section-header">
+                        <h1>Gestión de Habitaciones</h1>
+                        <p class="section-subtitle">Registra y gestiona todas las habitaciones de tus hoteles</p>
                     </div>
 
-                    <!-- Formulario de Habitaciones -->
-                    <div class="card mb-4">
-                        <div class="card-header bg-primary text-white">
-                            <h5 class="mb-0">Registrar Nueva Habitación</h5>
+                    <div class="row">
+                        <!-- Formulario de Habitaciones -->
+                        <div class="col-lg-5">
+                            <div class="card card-elevated">
+                                <div class="card-header card-header-gradient">
+                                    <h5 class="mb-0">Registrar Habitación</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form id="habitacionForm">
+                                        <div class="form-floating mb-3">
+                                            <select class="form-select" id="habitacionHotel" required>
+                                                <option value="">Seleccionar hotel</option>
+                                            </select>
+                                            <label for="habitacionHotel">Hotel</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="text" class="form-control" id="habitacionCodigo" placeholder="Código" required>
+                                            <label for="habitacionCodigo">Código de Habitación</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="number" class="form-control" id="habitacionPiso" min="1" placeholder="Piso" required>
+                                            <label for="habitacionPiso">Piso</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <input type="number" class="form-control" id="habitacionCapacidad" min="1" placeholder="Capacidad" required>
+                                            <label for="habitacionCapacidad">Capacidad (personas)</label>
+                                        </div>
+                                        <div class="form-floating mb-3">
+                                            <select class="form-select" id="habitacionTipo" required>
+                                                <option value="">Seleccionar tipo</option>
+                                                <option value="Estándar">Estándar</option>
+                                                <option value="Doble">Doble</option>
+                                                <option value="Suite">Suite</option>
+                                            </select>
+                                            <label for="habitacionTipo">Tipo de Habitación</label>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary w-100">
+                                            <span>Registrar Habitación</span>
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-body">
-                            <form id="habitacionForm">
-                                <div class="mb-3">
-                                    <label for="habitacionHotel" class="form-label">Seleccionar Hotel</label>
-                                    <select class="form-select" id="habitacionHotel" required>
-                                        <option value="">-- Seleccione un hotel --</option>
-                                    </select>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="habitacionCodigo" class="form-label">Código de Habitación</label>
-                                    <input type="text" class="form-control" id="habitacionCodigo" placeholder="Ej: 101, 202" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="habitacionPiso" class="form-label">Piso</label>
-                                    <input type="number" class="form-control" id="habitacionPiso" min="1" placeholder="Ingrese el piso" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="habitacionCapacidad" class="form-label">Capacidad</label>
-                                    <input type="number" class="form-control" id="habitacionCapacidad" min="1" placeholder="Número de personas" required>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="habitacionTipo" class="form-label">Tipo de Habitación</label>
-                                    <select class="form-select" id="habitacionTipo" required>
-                                        <option value="">-- Seleccione tipo --</option>
-                                        <option value="Estándar">Estándar</option>
-                                        <option value="Doble">Doble</option>
-                                        <option value="Suite">Suite</option>
-                                    </select>
-                                </div>
-                                <button type="submit" class="btn btn-primary">Agregar Habitación</button>
-                            </form>
-                        </div>
-                    </div>
 
-                    <!-- Lista de Habitaciones -->
-                    <div class="card">
-                        <div class="card-header bg-secondary text-white">
-                            <h5 class="mb-0">Lista de Habitaciones</h5>
-                        </div>
-                        <div class="card-body">
-                            <div id="habitacionList" class="table-responsive">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Hotel</th>
-                                            <th>Código</th>
-                                            <th>Piso</th>
-                                            <th>Capacidad</th>
-                                            <th>Tipo</th>
-                                            <th>Acciones</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody id="habitacionTableBody">
-                                        <tr>
-                                            <td colspan="6" class="text-center text-muted">No hay habitaciones registradas</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
+                        <!-- Lista de Habitaciones -->
+                        <div class="col-lg-7">
+                            <div class="card card-elevated">
+                                <div class="card-header card-header-gradient-secondary">
+                                    <h5 class="mb-0">Habitaciones Registradas</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div id="habitacionList" class="table-responsive">
+                                        <table class="table table-hover">
+                                            <thead>
+                                                <tr>
+                                                    <th>Hotel</th>
+                                                    <th>Código</th>
+                                                    <th>Piso</th>
+                                                    <th>Capacidad</th>
+                                                    <th>Tipo</th>
+                                                    <th>Acciones</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody id="habitacionTableBody">
+                                                <tr>
+                                                    <td colspan="6" class="text-center text-muted py-5">
+                                                        <div class="empty-state">
+                                                            <div class="empty-state-icon">∅</div>
+                                                            <p>No hay habitaciones registradas</p>
+                                                            <small>Registra tu primera habitación para comenzar</small>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -173,8 +215,19 @@
     </div>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white text-center py-3 mt-5">
-        <p class="mb-0">&copy; 2024 Gestión de Hoteles. Todos los derechos reservados.</p>
+    <footer>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6">
+                    <h6>Hotel Management System</h6>
+                    <p>Solución integral para la gestión hotelera</p>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p class="mb-0">&copy; 2024 Todos los derechos reservados</p>
+                    <small>Versión 1.0</small>
+                </div>
+            </div>
+        </div>
     </footer>
 
     <!-- Modal para editar hotel -->
@@ -182,25 +235,25 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Editar Hotel</h5>
+                    <h5 class="modal-title">Editar Información del Hotel</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
                     <form id="editHotelForm">
                         <input type="hidden" id="editHotelId">
-                        <div class="mb-3">
-                            <label for="editHotelNombre" class="form-label">Nombre</label>
+                        <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="editHotelNombre" required>
+                            <label for="editHotelNombre">Nombre</label>
                         </div>
-                        <div class="mb-3">
-                            <label for="editHotelUbicacion" class="form-label">Ubicación</label>
+                        <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="editHotelUbicacion" required>
+                            <label for="editHotelUbicacion">Ubicación</label>
                         </div>
-                        <div class="mb-3">
-                            <label for="editHotelEstrellas" class="form-label">Estrellas</label>
+                        <div class="form-floating mb-3">
                             <input type="number" class="form-control" id="editHotelEstrellas" min="1" max="5" required>
+                            <label for="editHotelEstrellas">Estrellas</label>
                         </div>
-                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                        <button type="submit" class="btn btn-primary w-100">Guardar Cambios</button>
                     </form>
                 </div>
             </div>
@@ -218,27 +271,27 @@
                 <div class="modal-body">
                     <form id="editHabitacionForm">
                         <input type="hidden" id="editHabitacionId">
-                        <div class="mb-3">
-                            <label for="editHabitacionCodigo" class="form-label">Código</label>
+                        <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="editHabitacionCodigo" required>
+                            <label for="editHabitacionCodigo">Código</label>
                         </div>
-                        <div class="mb-3">
-                            <label for="editHabitacionPiso" class="form-label">Piso</label>
+                        <div class="form-floating mb-3">
                             <input type="number" class="form-control" id="editHabitacionPiso" min="1" required>
+                            <label for="editHabitacionPiso">Piso</label>
                         </div>
-                        <div class="mb-3">
-                            <label for="editHabitacionCapacidad" class="form-label">Capacidad</label>
+                        <div class="form-floating mb-3">
                             <input type="number" class="form-control" id="editHabitacionCapacidad" min="1" required>
+                            <label for="editHabitacionCapacidad">Capacidad</label>
                         </div>
-                        <div class="mb-3">
-                            <label for="editHabitacionTipo" class="form-label">Tipo</label>
+                        <div class="form-floating mb-3">
                             <select class="form-select" id="editHabitacionTipo" required>
                                 <option value="Estándar">Estándar</option>
                                 <option value="Doble">Doble</option>
                                 <option value="Suite">Suite</option>
                             </select>
+                            <label for="editHabitacionTipo">Tipo</label>
                         </div>
-                        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+                        <button type="submit" class="btn btn-primary w-100">Guardar Cambios</button>
                     </form>
                 </div>
             </div>
