@@ -354,5 +354,5 @@ let manager;
 
 document.addEventListener('DOMContentLoaded', () => {
     manager = new HotelManager();
-    console.log('Aplicación de Gestión de Hoteles iniciada correctamente');
+    console.log('Aplicación de Gestión Hotelera iniciada correctamente');
 });
